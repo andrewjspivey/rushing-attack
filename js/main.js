@@ -227,8 +227,7 @@ class Defender {
         this.num = num;
         this.posX = posX;
         this.posY = posY;
-        this.speed = 8;
-        this.direction = ''
+        this.speed = 1.3;
     }
     drawSprite(img, srcX, srcY, srcW, srcH, destX, destY, destW, desth) {
         c.drawImage(defSprite,  0, 0, 80, 88, this.posX, this.posY, 50, 52)
