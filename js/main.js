@@ -169,25 +169,30 @@ document.onkeydown = move;  */
 
 const player = {
     x: 175,
-    y: 600,
-    width: 50,
-    height: 95, 
+    y: 600, 
     speed: 10,
 }
 
 
 const userSprite = new Image();
-userSprite.src = 'https://jvin825.files.wordpress.com/2012/07/all_football_sprite.jpg';
-console.log(userSprite)
+userSprite.src = 'assets/player-stepright.png';
+
+const defSprite = new Image();
+defSprite.src = 'assets/defender-stepright.png';
+console.log(defSprite)
+
 
 function drawSprite(img, srcX, srcY, srcW, srcH, destX, destY, destW, desth) {
     c.drawImage(img, srcX, srcY, srcW, srcH, destX, destY, destW, desth);
 }
 
+//drawSprite(defSprite, 0, 0, 80, 88, 175, 300, 80, 88);
+
 function animate() { // will use to change picture of player every step if have time and canvas every time
     c.clearRect(0, 0, 400, 720)
     createField();
-    drawSprite(userSprite, 25, 50, player.width, player.height, player.x, player.y, player.width, player.height);
+    drawSprite(userSprite, 0, 0, 50, 95, player.x, player.y, 35, 70);
+    drawSprite(defSprite, 0, 0, 80, 88, 160, 150, 50, 52);
     requestAnimationFrame(animate);
 }
 animate();
@@ -213,6 +218,11 @@ document.addEventListener("keydown", function(event) { // event listener for pla
 });
 
 
+class Defender {
+    constructor(num) {
+
+    }
+}
 
 //const player = new User(userSprite, 10);
 
