@@ -55,9 +55,9 @@ const createField = function () {
         c.stroke();
         y += 60;
     }     
- 
+    
 };
-createField();
+//createField();
 
 
 // creating box that represents player to move with keys
@@ -178,12 +178,14 @@ const player = {
 
 const userSprite = new Image();
 userSprite.src = 'https://jvin825.files.wordpress.com/2012/07/all_football_sprite.jpg';
+console.log(userSprite)
 
 function drawSprite(img, srcX, srcY, srcW, srcH, destX, destY, destW, desth) {
     c.drawImage(img, srcX, srcY, srcW, srcH, destX, destY, destW, desth);
 }
 
 function animate() { // will use to change picture of player every step if have time and canvas every time
+    c.clearRect(0, 0, 400, 720)
     createField();
     drawSprite(userSprite, 25, 50, player.width, player.height, player.x, player.y, player.width, player.height);
     requestAnimationFrame(animate);
@@ -194,23 +196,23 @@ animate();
 document.addEventListener("keydown", function(event) { // event listener for player movement
     if (event.keyCode == 38){ // move player up
         player.y -= player.speed;
-        drawSprite(userSprite, 25, 50, 50, 95, player.x, player.y, 50, 100);
+        //drawSprite(userSprite, 25, 50, 50, 95, player.x, player.y, 50, 100);
     }
     else if (event.keyCode == 37){ // move player left
         player.x -= player.speed;
-        drawSprite(userSprite, 25, 50, 50, 95, player.x, player.y, 50, 100);
+        //drawSprite(userSprite, 25, 50, 50, 95, player.x, player.y, 50, 100);
     }
     else if (event.keyCode == 40){ // move player down
         player.y += player.speed;
-        drawSprite(userSprite, 25, 50, 50, 95, player.x, player.y, 50, 100);
+        //drawSprite(userSprite, 25, 50, 50, 95, player.x, player.y, 50, 100);
     }
     else if (event.keyCode == 39){ // move player right
         player.x += player.speed;
-        drawSprite(userSprite, 25, 50, 50, 95, player.x, player.y, 50, 100);
+        //drawSprite(userSprite, 25, 50, 50, 95, player.x, player.y, 50, 100);
     }
 });
 
-console.log('apple')
+
 
 //const player = new User(userSprite, 10);
 
