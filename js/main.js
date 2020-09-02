@@ -188,15 +188,17 @@ function drawSprite(img, srcX, srcY, srcW, srcH, destX, destY, destW, desth) {
 
 //drawSprite(defSprite, 0, 0, 80, 88, 175, 300, 80, 88);
 
-function animate() { // will use to change picture of player every step if have time and canvas every time
-    c.clearRect(0, 0, 400, 720)
-    createField();
-    drawSprite(userSprite, 0, 0, 50, 95, player.x, player.y, 35, 70);
+/* function animate() { // will use to change picture of player every step if have time and canvas every time
+    c.clearRect(0, 0, 400, 720) // clears the whole canvas every frame
+    createField(); // recreates field lines every frame
+    drawSprite(userSprite, 0, 0, 50, 95, player.x, player.y, 35, 70); //draws sprites every frame
     drawSprite(defSprite, 0, 0, 80, 88, 160, 150, 50, 52);
+    defender1.drawSprite;
+    defender1.move;
     requestAnimationFrame(animate);
 }
 animate();
-
+ */
 
 document.addEventListener("keydown", function(event) { // event listener for player movement
     if (event.keyCode == 38){ // move player up
@@ -218,11 +220,53 @@ document.addEventListener("keydown", function(event) { // event listener for pla
 });
 
 
-class Defender {
-    constructor(num) {
+//creating defender class to add multiple defenders
 
+class Defender {
+    constructor(num, posX, posY) { //pox and posy are for starting point of defender
+        this.num = num;
+        this.posX = posX;
+        this.posY = posY;
+        this.speed = 8;
+        this.direction = ''
+    }
+    drawSprite(img, srcX, srcY, srcW, srcH, destX, destY, destW, desth) {
+        c.drawImage(defSprite,  0, 0, 80, 88, this.posX, this.posY, 50, 52)
+    }
+    move() {
+        let randomNum = Math.floor(Math.random() * 100)
+        
+        if (randomNum >= 50) { // move defender down field 50% of time
+            this.posY += this.speed; 
+            this.drawSprite();
+        }
+        if (randomNum <= 49 && randomNum >= 30) { // move defender down field 50% of time
+            this.posX -= this.speed; 
+            this.drawSprite();
+        }
+        if (randomNum <= 29 && randomNum >= 10) { // move defender down field 50% of time
+            this.posX += this.speed; 
+            this.drawSprite();
+        }
+        if (randomNum < 10) { // move defender down field 50% of time
+            this.posY -= this.speed; 
+            this.drawSprite();
+        }
     }
 }
+
+const defender1 = new Defender(1, 100, 200);
+
+function animateGame() { // will use to change picture of player every step if have time and canvas every time
+    c.clearRect(0, 0, 400, 720) // clears the whole canvas every frame
+    createField(); // recreates field lines every frame
+    drawSprite(userSprite, 0, 0, 50, 95, player.x, player.y, 35, 70); //draws sprites every frame
+    //drawSprite(defSprite, 0, 0, 80, 88, 160, 150, 50, 52);
+    defender1.drawSprite(defSprite, 0, 0, 80, 88, 160, 150, 50, 52);
+    defender1.move();
+    requestAnimationFrame(animateGame);
+}
+animateGame();
 
 //const player = new User(userSprite, 10);
 
