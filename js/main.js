@@ -30,7 +30,7 @@ const menuButtons = function() {
         document.querySelector(".modals").style.display = "none";
     });
     tackledCloseBtn.addEventListener("click", function() {
-        document.querySelector("#tackled-modal").style.display = "none";
+        document.getElementById("tackled-modal").style.display = "none";
     });
     
 } 
@@ -153,12 +153,16 @@ const defender4 = new Defender(300, 200, 1.5);
 const defender5 = new Defender(150, 80, 1.1);
 const defender6 = new Defender(300, 80, 1.5);
 
+
+/* let requestAnimationFrame = window.requestAnimationFrame;
+let cancelAnimationFrame= window.cancelAnimationFrame; */
+
 // defenders array to loop through on tackle function
 let defendersArray = [defender1, defender2, defender3, defender4, defender5, defender6];
 
 // detects if one of defenders and user touch
 function tackle(userPos, defPos) {
-    return !(userPos.x > defPos.posX + 50 || userPos.x + 40 < defPos.posX || userPos.y > defPos.posY + 52 || userPos.y + 70 < 52)
+    return !(userPos.x > defPos.posX + 40 || userPos.x + 35 < defPos.posX || userPos.y > defPos.posY + 40 || userPos.y + 70 < 42)
         
     }
 // loops through defenders to detect if user has been touched by defender
@@ -167,9 +171,11 @@ function tackleDetection() {
     for (let i = 0; i < defendersArray.length; i++) {
         if (tackle(player, defendersArray[i])){
             document.querySelector("#tackled-modal").style.display = "flex";
+            return true;
         
     } 
   }  
+        cancelAnimationFrame(animateGame);
 }
 //  checks if user has crossed the endzone
 function touchDown() {
@@ -177,6 +183,8 @@ function touchDown() {
         console.log("touchdown!")
     }
 }
+
+const gameOver = function() {}
 
 /* function resetGame() {
     animateGame
@@ -200,9 +208,11 @@ const animateGame = function() { // will use to change picture of player every s
     defender6.drawSprite();
     defender6.move();
     tackleDetection();
+    if (tackleDetection()) return;
     touchDown();
     requestAnimationFrame(animateGame);
 }
+
 
 //animateGame();
 
