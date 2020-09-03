@@ -16,7 +16,7 @@ these classes will need functions for players to move - class for defenders is d
 
 const startBtn = document.getElementById("start")
 const howPlayBtn = document.getElementById("how-to-play")
-const closeBtn = document.getElementById("close")
+const howPlaycloseBtn = document.getElementById("how-play-close")
 
 
 const buttons = function() {
@@ -26,7 +26,7 @@ const buttons = function() {
     howPlayBtn.addEventListener("click", function() {
         document.querySelector(".modals").style.display = "flex";
     });
-    closeBtn.addEventListener("click", function() {
+    howPlaycloseBtn.addEventListener("click", function() {
         document.querySelector(".modals").style.display = "none";
     }) 
     
