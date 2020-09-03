@@ -4,7 +4,7 @@
 /* Breakdown:
 - draw field lines on canvas -done
 - get box that will become sprite image to move with arrow keys- done
-- create classes for user player and opponents 
+- create object for player and class for defenders  
 these classes will need functions for players to move - class for defenders is done, will go back to user if time
 - create function for being "tackled", 
 -  create function for scoring TD,
@@ -14,7 +14,28 @@ these classes will need functions for players to move - class for defenders is d
 - 
  */
 
+const startBtn = document.getElementById("start")
+const howPlayBtn = document.getElementById("how-to-play")
+const closeBtn = document.getElementById("close")
 
+
+const buttons = function() {
+    startBtn.addEventListener("click", function() {
+        animateGame();
+    });
+    howPlayBtn.addEventListener("click", function() {
+        document.querySelector(".modals").style.display = "flex";
+    });
+    closeBtn.addEventListener("click", function() {
+        document.querySelector(".modals").style.display = "none";
+    }) 
+    
+} 
+buttons();
+/* $body.on("click", function(){
+    console.log('start game'); // full event obj
+    ///console.log(this); // event.target
+  });   */
 
 // drawing lines on the field to create canvas
 let canvas = document.querySelector('canvas'); //selected canvas stored in canvas
@@ -24,6 +45,7 @@ canvas.width = 400; // setting dimensions of canvas
 canvas.height = 720;
 
 const c = canvas.getContext('2d'); // setting canvas context to 2d
+
 
 
 // draws lines on the field with for loop
@@ -45,7 +67,7 @@ const createField = function () {
     }     
     
 };
-
+createField();
 // drawImage method: drawImage(imgsrc, srcx, srcy, srcw,scrh, destx, desty, destw, desth)
 
 
@@ -125,10 +147,11 @@ const defender1 = new Defender(75, 200, 1.2);
 const defender2 = new Defender(150, 175, 2);
 const defender3 = new Defender(225, 190, 1.3);
 const defender4 = new Defender(300, 200, 1.5);
-
+const defender5 = new Defender(150, 80, 1.1);
+const defender6 = new Defender(300, 80, 1.5);
 
 // defenders array to loop through on tackle function
-let defendersArray = [defender1, defender2, defender3, defender4];
+let defendersArray = [defender1, defender2, defender3, defender4, defender5, defender6];
 
 // detects if one of defenders and user touch
 function tackle(userPos, defPos) {
@@ -155,7 +178,7 @@ function touchDown() {
     animateGame
 } */
 // animates game 
-function animateGame() { // will use to change picture of player every step if have time and canvas every time
+const animateGame = function() { // will use to change picture of player every step if have time and canvas every time
     c.clearRect(0, 0, 400, 720) // clears the whole canvas every frame
     createField(); // recreates field lines every frame
     drawSprite(userSprite, 0, 0, 50, 95, player.x, player.y, 35, 70); //draws sprites every frame
@@ -168,11 +191,15 @@ function animateGame() { // will use to change picture of player every step if h
     defender3.move();
     defender4.drawSprite();
     defender4.move();
+    defender5.drawSprite();
+    defender5.move();
+    defender6.drawSprite();
+    defender6.move();
     tackleDetection();
     touchDown();
     requestAnimationFrame(animateGame);
 }
 
-animateGame();
+//animateGame();
 
 

@@ -92,3 +92,11 @@ canvas {
     top: 30px;
 
 }
+
+.modals {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
