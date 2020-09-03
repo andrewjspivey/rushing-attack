@@ -16,22 +16,25 @@ these classes will need functions for players to move - class for defenders is d
 
 const startBtn = document.getElementById("start")
 const howPlayBtn = document.getElementById("how-to-play")
-const howPlaycloseBtn = document.getElementById("how-play-close")
+const howPlayCloseBtn = document.getElementById("how-play-close")
+const tackledCloseBtn = document.getElementById("tackled-modal-close");
 
-
-const buttons = function() {
+const menuButtons = function() {
     startBtn.addEventListener("click", function() {
         animateGame();
     });
     howPlayBtn.addEventListener("click", function() {
         document.querySelector(".modals").style.display = "flex";
     });
-    howPlaycloseBtn.addEventListener("click", function() {
+    howPlayCloseBtn.addEventListener("click", function() {
         document.querySelector(".modals").style.display = "none";
-    }) 
+    });
+    tackledCloseBtn.addEventListener("click", function() {
+        document.querySelector("#tackled-modal").style.display = "none";
+    });
     
 } 
-buttons();
+menuButtons();
 /* $body.on("click", function(){
     console.log('start game'); // full event obj
     ///console.log(this); // event.target
@@ -163,7 +166,8 @@ function tackleDetection() {
     
     for (let i = 0; i < defendersArray.length; i++) {
         if (tackle(player, defendersArray[i])){
-            
+            document.querySelector("#tackled-modal").style.display = "flex";
+        
     } 
   }  
 }
