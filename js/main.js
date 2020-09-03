@@ -18,6 +18,8 @@ const startBtn = document.getElementById("start")
 const howPlayBtn = document.getElementById("how-to-play")
 const howPlayCloseBtn = document.getElementById("how-play-close")
 const tackledCloseBtn = document.getElementById("tackled-modal-close");
+const touchdownCloseBtn = document.getElementById("touchdown-modal-close");
+
 
 const menuButtons = function() {
     startBtn.addEventListener("click", function() {
@@ -32,7 +34,6 @@ const menuButtons = function() {
     tackledCloseBtn.addEventListener("click", function() {
         document.getElementById("tackled-modal").style.display = "none";
     });
-    
 } 
 menuButtons();
 /* $body.on("click", function(){
@@ -162,7 +163,7 @@ let defendersArray = [defender1, defender2, defender3, defender4, defender5, def
 
 // detects if one of defenders and user touch
 function tackle(userPos, defPos) {
-    return !(userPos.x > defPos.posX + 40 || userPos.x + 35 < defPos.posX || userPos.y > defPos.posY + 40 || userPos.y + 70 < 42)
+    return !(userPos.x > defPos.posX + 40 || userPos.x + 30 < defPos.posX || userPos.y > defPos.posY + 40 || userPos.y + 70 < defPos.posY)
         
     }
 // loops through defenders to detect if user has been touched by defender
@@ -180,7 +181,7 @@ function tackleDetection() {
 //  checks if user has crossed the endzone
 function touchDown() {
     if(player.y <= 30) {
-        console.log("touchdown!")
+        document.getElementById("touchdown-modal").style.display = "flex";
     }
 }
 
