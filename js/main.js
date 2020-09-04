@@ -121,7 +121,7 @@ class Defender {
         this.speed = speed;
     }
     drawSprite() { // draw the defender sprites at starting position
-        c.drawImage(defSprite,  0, 0, 80, 88, this.posX, this.posY, 50, 52)
+        c.drawImage(defSprite,  0, 0, 80, 88, this.posX, this.posY, 35, 37)
     }
     move() { 
         let randomNum = Math.floor(Math.random() * 100)
@@ -147,12 +147,14 @@ class Defender {
 };
 
 // give defenders different starting positions and different speeds
-const defender1 = new Defender(75, 200, 1.2); 
-const defender2 = new Defender(150, 175, 2);
-const defender3 = new Defender(225, 190, 1.3);
-const defender4 = new Defender(300, 200, 1.5);
-const defender5 = new Defender(150, 80, 1.1);
-const defender6 = new Defender(300, 80, 1.5);
+const defender1 = new Defender(40, 175, 1.9); 
+const defender2 = new Defender(110, 200, 1.7);
+const defender3 = new Defender(190, 190, 2.4);
+const defender4 = new Defender(300, 210, 1.5);
+const defender5 = new Defender(150, 70, 1.3);
+const defender6 = new Defender(310, 80, 2.2);
+const defender7 = new Defender(50, 70, 1.6);
+const defender8 = new Defender(250, 100, 2.0);
 
 
 /* let requestAnimationFrame = window.requestAnimationFrame;
@@ -163,9 +165,14 @@ let defendersArray = [defender1, defender2, defender3, defender4, defender5, def
 
 // detects if one of defenders and user touch
 function tackle(userPos, defPos) {
-    return !(userPos.x > defPos.posX + 40 || userPos.x + 30 < defPos.posX || userPos.y > defPos.posY + 40 || userPos.y + 70 < defPos.posY)
-        
+    return !(userPos.x > defPos.posX + 30 || userPos.x + 28 < defPos.posX || userPos.y > defPos.posY + 30 || userPos.y + 40 < defPos.posY)
+        // if users xposition on canvas is greater than the defenders x position + the width of the defender,
+        // the user and defender hanvt touched on the left side of user,
+        // if the users x position plus the users width is less than defenders x position, they havnt touched on left side of user
+        // if the users y position is greater than the defenders y pos plus the defender height, they havnt touched on front of user
+        // if the users y position plus the users height is less than the defenders y position they havnt touched on the bottom of the user
     }
+
 // loops through defenders to detect if user has been touched by defender
 function tackleDetection() {
     
@@ -176,8 +183,10 @@ function tackleDetection() {
         
     } 
   }  
-        cancelAnimationFrame(animateGame);
+        //cancelAnimationFrame(animateGame);
 }
+
+
 //  checks if user has crossed the endzone
 function touchDown() {
     if(player.y <= 30) {
@@ -194,7 +203,7 @@ const gameOver = function() {}
 const animateGame = function() { // will use to change picture of player every step if have time and canvas every time
     c.clearRect(0, 0, 400, 720) // clears the whole canvas every frame
     createField(); // recreates field lines every frame
-    drawSprite(userSprite, 0, 0, 50, 95, player.x, player.y, 35, 70); //draws sprites every frame
+    drawSprite(userSprite, 0, 0, 50, 95, player.x, player.y, 30, 55); //draws sprites every frame
     //drawSprite(defSprite, 0, 0, 80, 88, 160, 150, 50, 52);
     defender1.drawSprite();
     defender1.move();;            //calling defenders and their functions 
@@ -208,6 +217,10 @@ const animateGame = function() { // will use to change picture of player every s
     defender5.move();
     defender6.drawSprite();
     defender6.move();
+    defender7.drawSprite();
+    defender7.move();
+    defender8.drawSprite();
+    defender8.move();
     tackleDetection();
     if (tackleDetection()) return;
     touchDown();
