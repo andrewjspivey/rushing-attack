@@ -1,6 +1,5 @@
 
 /* Rushing Attack */
-
 /* Breakdown:
 - draw field lines on canvas -done
 - get box that will become sprite image to move with arrow keys- done
@@ -13,17 +12,12 @@ these classes will need functions for players to move - class for defenders is d
 - create function for scoreboard updating 
 - 
  */
-
 // drawing lines on the field to create canvas
 let canvas = document.querySelector('canvas'); //selected canvas stored in canvas
 console.log(canvas);
-
 canvas.width = 400; // setting dimensions of canvas
 canvas.height = 720;
-
 const c = canvas.getContext('2d'); // setting canvas context to 2d
-
-
 const startBtn = document.getElementById("start");
 const howPlayBtn = document.getElementById("how-to-play");
 const howPlayCloseBtn = document.getElementById("how-play-close");
@@ -31,11 +25,16 @@ const tackledCloseBtn = document.getElementById("tackled-modal-close");
 const touchdownCloseBtn = document.getElementById("touchdown-modal-close");
 console.log(touchdownCloseBtn);
 
+let gameOver = false;
+let resetGGame = true;
+
 
 const menuButtons = function() {
     startBtn.addEventListener("click", function() {
-        animateGame();
-    });
+        if (!gameOver){
+            animateGame();
+        }
+    })
     howPlayBtn.addEventListener("click", function() {
         document.querySelector(".modals").style.display = "flex";
     });
@@ -50,14 +49,11 @@ const menuButtons = function() {
     }); 
 };
 menuButtons();
-
 /* $body.on("click", function(){
     console.log('start game'); // full event obj
     ///console.log(this); // event.target
   });   */
-
 // draws lines on the field with for loop
-
 const createField = function () {
     c.fillStyle = "#AA0000";
     c.fillRect(0, 0, 400, 60); // creates top endzone
@@ -77,14 +73,12 @@ const createField = function () {
 };
 createField();
 // drawImage method: drawImage(imgsrc, srcx, srcy, srcw,scrh, destx, desty, destw, desth)
-
-
 const userSprite = new Image();
 userSprite.src = 'assets/player-stepright.png';
-
 const defSprite = new Image();
 defSprite.src = 'assets/defender-stepright.png';
 console.log(defSprite)
+
 
 //player (user) object
 const player = {
@@ -92,14 +86,13 @@ const player = {
     y: 600, // y - user images y starting point on canvas
     speed: 10,
 }
-
 // function to draw the player's sprite. params are x, y, width, and height dimensions of sprite img and where on canvas
 function drawSprite(img, srcX, srcY, srcW, srcH, destX, destY, destW, desth) {
     c.drawImage(img, srcX, srcY, srcW, srcH, destX, destY, destW, desth);
 }
 
-// event listener for key control of user
 
+// event listener for key control of user
 document.addEventListener("keydown", function(event) { // event listener for player movement
     if (event.keyCode == 38){ // move player up
         player.y -= player.speed;
@@ -123,7 +116,6 @@ document.addEventListener("keydown", function(event) { // event listener for pla
 
 
 //creating defender class to add multiple defenders
-
 class Defender {
     constructor(posX, posY, speed) { //posX and posY are for starting point of defender
         this.posX = posX;
@@ -156,25 +148,32 @@ class Defender {
     
 };
 
+/* 
+class Factory {
+    constructor(posX, posY, speed){
+      this.defenderArray = [];
+      this.posX = Math.floor(Math.random() * 40 + 280);
+      this.posyY = Math.floor(Math.random() * )
+    }
+  ​
+    
+  } */
+
 // give defenders different starting positions and different speeds
 
 
-const defender1 = new Defender(40, 175, 1.9); 
-const defender2 = new Defender(110, 200, 1.7);
-const defender3 = new Defender(190, 190, 2.4);
-const defender4 = new Defender(300, 210, 1.5);
-const defender5 = new Defender(150, 70, 1.3);
-const defender6 = new Defender(310, 80, 2.2);
-const defender7 = new Defender(50, 70, 1.6);
-const defender8 = new Defender(250, 100, 2.0);
-
-
+let defender1 = new Defender(40, 175, 1.9); 
+let defender2 = new Defender(110, 200, 1.7);
+let defender3 = new Defender(190, 190, 2.4);
+let defender4 = new Defender(300, 210, 1.5);
+let defender5 = new Defender(150, 70, 1.3);
+let defender6 = new Defender(310, 80, 2.2);
+let defender7 = new Defender(50, 70, 1.6);
+let defender8 = new Defender(250, 100, 2.0); 
 /* let requestAnimationFrame = window.requestAnimationFrame;
 let cancelAnimationFrame= window.cancelAnimationFrame; */
-
 // defenders array to loop through on tackle function
 let defendersArray = [defender1, defender2, defender3, defender4, defender5, defender6, defender7, defender8];
-
 // detects if one of defenders and user touch
 const tackle = function(userPos, defPos) {
     if (userPos.x > defPos.posX + 30 || 
@@ -191,9 +190,9 @@ const tackle = function(userPos, defPos) {
         // if the users y position is greater than the defenders y pos plus the defender height, they havnt touched on front of user
         // if the users y position plus the users height is less than the defenders y position they havnt touched on the bottom of the user
 };
-
 // loops through defenders to detect if user has been touched by defender
 const tackleDetection = function() {
+
 
     for (let i = 0; i < defendersArray.length; i++) {
         if (tackle(player, defendersArray[i])){
@@ -203,8 +202,6 @@ const tackleDetection = function() {
     } 
   }          //cancelAnimationFrame(animateGame);
 }
-
-
 //  checks if user has crossed the endzone
 const touchDown = function() {
     let points = 0;
@@ -217,7 +214,6 @@ const touchDown = function() {
     }
     //$("#points").text(`${points}`)
 };
-
 /* const restartGame = function() {
     if (touchDown() == true || tackleDetection() == true) {
         c.clearRect(0, 0, 400, 720)
@@ -226,7 +222,7 @@ const touchDown = function() {
     }
 }
 restartGame(); */
-/* function resetGame() {
+/* function resetGGameGame() {
     animateGame
 } */
 // animates game 
@@ -235,6 +231,27 @@ const animateGame = function() { // will use to change picture of player every s
     createField(); // recreates field lines every frame
     drawSprite(userSprite, 0, 0, 50, 95, player.x, player.y, 30, 55); //draws sprites every frame
     //drawSprite(defSprite, 0, 0, 80, 88, 160, 150, 50, 52);
+    if (resetGGame) {
+    player.x = 175;
+    player.y = 600;
+    drawSprite(userSprite, 0, 0, 50, 95, player.x, player.y, 30, 55);
+    console.log(resetGGame)
+    defender1 = new Defender(40, 175, 1.9); 
+    defender2 = new Defender(110, 200, 1.7);
+    defender3 = new Defender(190, 190, 2.4);
+    defender4 = new Defender(300, 210, 1.5);
+    defender5 = new Defender(150, 70, 1.3);
+    defender6 = new Defender(310, 80, 2.2);
+    defender7 = new Defender(50, 70, 1.6);
+    defender8 = new Defender(250, 100, 2.0);
+    defendersArray = [defender1, defender2, defender3, defender4, defender5, defender6, defender7, defender8];
+    resetGGame = false;
+    }
+    console.log(defender1)
+   /*  */
+/* let requestAnimationFrame = window.requestAnimationFrame;
+let cancelAnimationFrame= window.cancelAnimationFrame; */
+// defenders array to loop through on tackle function
     defender1.drawSprite();
     defender1.move();;            //calling defenders and their functions 
     defender2.drawSprite();
@@ -252,13 +269,17 @@ const animateGame = function() { // will use to change picture of player every s
     defender8.drawSprite();
     defender8.move();
     tackleDetection();
-    if (tackleDetection()) return;
+    if (tackleDetection()){
+        resetGGame = true;
+        return;
+    };
     touchDown();
-    if (touchDown()) return;
+    if (touchDown()) {
+        resetGGame = true;
+        return;
+    };
     window.requestAnimationFrame(animateGame);
 }
-
-
 
 
 
