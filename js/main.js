@@ -18,12 +18,15 @@ console.log(canvas);
 canvas.width = 400; // setting dimensions of canvas
 canvas.height = 720;
 const c = canvas.getContext('2d'); // setting canvas context to 2d
+
+
 const startBtn = document.getElementById("start");
 const howPlayBtn = document.getElementById("how-to-play");
 const howPlayCloseBtn = document.getElementById("how-play-close");
 const tackledCloseBtn = document.getElementById("tackled-modal-close");
 const touchdownCloseBtn = document.getElementById("touchdown-modal-close");
 console.log(touchdownCloseBtn);
+
 
 let gameOver = false;
 let resetGGame = true;
@@ -72,6 +75,7 @@ const createField = function () {
     
 };
 createField();
+
 // drawImage method: drawImage(imgsrc, srcx, srcy, srcw,scrh, destx, desty, destw, desth)
 const userSprite = new Image();
 userSprite.src = 'assets/player-stepright.png';
@@ -161,7 +165,6 @@ class Factory {
 
 // give defenders different starting positions and different speeds
 
-
 let defender1 = new Defender(40, 175, 1.9); 
 let defender2 = new Defender(110, 200, 1.7);
 let defender3 = new Defender(190, 190, 2.4);
@@ -170,10 +173,11 @@ let defender5 = new Defender(150, 70, 1.3);
 let defender6 = new Defender(310, 80, 2.2);
 let defender7 = new Defender(50, 70, 1.6);
 let defender8 = new Defender(250, 100, 2.0); 
-/* let requestAnimationFrame = window.requestAnimationFrame;
-let cancelAnimationFrame= window.cancelAnimationFrame; */
-// defenders array to loop through on tackle function
+
+
 let defendersArray = [defender1, defender2, defender3, defender4, defender5, defender6, defender7, defender8];
+
+
 // detects if one of defenders and user touch
 const tackle = function(userPos, defPos) {
     if (userPos.x > defPos.posX + 30 || 
@@ -190,9 +194,10 @@ const tackle = function(userPos, defPos) {
         // if the users y position is greater than the defenders y pos plus the defender height, they havnt touched on front of user
         // if the users y position plus the users height is less than the defenders y position they havnt touched on the bottom of the user
 };
+
+
 // loops through defenders to detect if user has been touched by defender
 const tackleDetection = function() {
-
 
     for (let i = 0; i < defendersArray.length; i++) {
         if (tackle(player, defendersArray[i])){
@@ -200,32 +205,23 @@ const tackleDetection = function() {
             return true;
         
     } 
-  }          //cancelAnimationFrame(animateGame);
+  }          
 }
+
 //  checks if user has crossed the endzone
+let points = 0;
+
 const touchDown = function() {
-    let points = 0;
     if (player.y <= 30) {
-        points+= 7;
+        points += 7;
         document.querySelector("#touchdown-modal").style.display = "flex";
-        window.cancelAnimationFrame(animateGame);
-        //restartGame();
+        $("#points").text(`${points}`)
         return true;
     }
     //$("#points").text(`${points}`)
 };
-/* const restartGame = function() {
-    if (touchDown() == true || tackleDetection() == true) {
-        c.clearRect(0, 0, 400, 720)
-        createField();
-        menuButtons();
-    }
-}
-restartGame(); */
-/* function resetGGameGame() {
-    animateGame
-} */
-// animates game 
+
+
 const animateGame = function() { // will use to change picture of player every step if have time and canvas every time
     c.clearRect(0, 0, 400, 720) // clears the whole canvas every frame
     createField(); // recreates field lines every frame
@@ -235,7 +231,6 @@ const animateGame = function() { // will use to change picture of player every s
     player.x = 175;
     player.y = 600;
     drawSprite(userSprite, 0, 0, 50, 95, player.x, player.y, 30, 55);
-    console.log(resetGGame)
     defender1 = new Defender(40, 175, 1.9); 
     defender2 = new Defender(110, 200, 1.7);
     defender3 = new Defender(190, 190, 2.4);
@@ -247,11 +242,6 @@ const animateGame = function() { // will use to change picture of player every s
     defendersArray = [defender1, defender2, defender3, defender4, defender5, defender6, defender7, defender8];
     resetGGame = false;
     }
-    console.log(defender1)
-   /*  */
-/* let requestAnimationFrame = window.requestAnimationFrame;
-let cancelAnimationFrame= window.cancelAnimationFrame; */
-// defenders array to loop through on tackle function
     defender1.drawSprite();
     defender1.move();;            //calling defenders and their functions 
     defender2.drawSprite();
@@ -273,7 +263,7 @@ let cancelAnimationFrame= window.cancelAnimationFrame; */
         resetGGame = true;
         return;
     };
-    touchDown();
+    //touchDown();
     if (touchDown()) {
         resetGGame = true;
         return;
