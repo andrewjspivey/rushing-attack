@@ -23,7 +23,14 @@
     <div class= "menu">
         <h1 class= "title">Rushing Attack!</h1>
         <div>
-            <img class="menu-image" src="" alt="player-image">
+            <div id="scoreboard">
+                
+                <div id="score">
+                    <span>Score</span>
+                    <h1 id="points">0</h1>
+                </div>
+            </div>
+
         </div>
         <div class= "options">
             <button id= "how-to-play">How to Play</button>
@@ -32,7 +39,7 @@
             
         </div>
     </div>
-    <div class="modals" id= modal-container>
+    <div class="modals">
         <div class="modal-messages">
             <div id="how-to-play-modal">
                 <p>Use arrow keys on keyboard to direct your player and avoid the defenders.</p>
@@ -45,7 +52,11 @@
         <p>You got tackled!</p>
         <button id="tackled-modal-close">Close</button>
     </div>
-
+    
+    <div id="touchdown-modal">
+        <p>TOUCHDOWN!!!</p>
+        <button id="touchdown-modal-close".onclick>Close</button>
+    </div>
     <div class= "game-play">
         <canvas>
             

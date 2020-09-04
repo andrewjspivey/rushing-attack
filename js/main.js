@@ -14,11 +14,22 @@ these classes will need functions for players to move - class for defenders is d
 - 
  */
 
-const startBtn = document.getElementById("start")
-const howPlayBtn = document.getElementById("how-to-play")
-const howPlayCloseBtn = document.getElementById("how-play-close")
+// drawing lines on the field to create canvas
+let canvas = document.querySelector('canvas'); //selected canvas stored in canvas
+console.log(canvas);
+
+canvas.width = 400; // setting dimensions of canvas
+canvas.height = 720;
+
+const c = canvas.getContext('2d'); // setting canvas context to 2d
+
+
+const startBtn = document.getElementById("start");
+const howPlayBtn = document.getElementById("how-to-play");
+const howPlayCloseBtn = document.getElementById("how-play-close");
 const tackledCloseBtn = document.getElementById("tackled-modal-close");
 const touchdownCloseBtn = document.getElementById("touchdown-modal-close");
+console.log(touchdownCloseBtn);
 
 
 const menuButtons = function() {
@@ -34,23 +45,16 @@ const menuButtons = function() {
     tackledCloseBtn.addEventListener("click", function() {
         document.getElementById("tackled-modal").style.display = "none";
     });
-} 
+    touchdownCloseBtn.addEventListener("click", function() {
+        document.getElementById("touchdown-modal").style.display = "none";
+    }); 
+};
 menuButtons();
+
 /* $body.on("click", function(){
     console.log('start game'); // full event obj
     ///console.log(this); // event.target
   });   */
-
-// drawing lines on the field to create canvas
-let canvas = document.querySelector('canvas'); //selected canvas stored in canvas
-console.log(canvas);
-
-canvas.width = 400; // setting dimensions of canvas
-canvas.height = 720;
-
-const c = canvas.getContext('2d'); // setting canvas context to 2d
-
-
 
 // draws lines on the field with for loop
 
@@ -161,20 +165,28 @@ const defender8 = new Defender(250, 100, 2.0);
 let cancelAnimationFrame= window.cancelAnimationFrame; */
 
 // defenders array to loop through on tackle function
-let defendersArray = [defender1, defender2, defender3, defender4, defender5, defender6];
+let defendersArray = [defender1, defender2, defender3, defender4, defender5, defender6, defender7, defender8];
 
 // detects if one of defenders and user touch
-function tackle(userPos, defPos) {
-    return !(userPos.x > defPos.posX + 30 || userPos.x + 28 < defPos.posX || userPos.y > defPos.posY + 30 || userPos.y + 40 < defPos.posY)
+const tackle = function(userPos, defPos) {
+    if (userPos.x > defPos.posX + 30 || 
+        userPos.x + 28 < defPos.posX || 
+        userPos.y > defPos.posY + 30 || 
+        userPos.y + 40 < defPos.posY) {
+            return false;
+    } else {
+        return true;
+    }
         // if users xposition on canvas is greater than the defenders x position + the width of the defender,
         // the user and defender hanvt touched on the left side of user,
         // if the users x position plus the users width is less than defenders x position, they havnt touched on left side of user
         // if the users y position is greater than the defenders y pos plus the defender height, they havnt touched on front of user
         // if the users y position plus the users height is less than the defenders y position they havnt touched on the bottom of the user
-    }
+};
 
 // loops through defenders to detect if user has been touched by defender
-function tackleDetection() {
+const tackleDetection = function() {
+
     
     for (let i = 0; i < defendersArray.length; i++) {
         if (tackle(player, defendersArray[i])){
@@ -182,19 +194,21 @@ function tackleDetection() {
             return true;
         
     } 
-  }  
-        //cancelAnimationFrame(animateGame);
+  }          //cancelAnimationFrame(animateGame);
 }
 
 
 //  checks if user has crossed the endzone
-function touchDown() {
-    if(player.y <= 30) {
-        document.getElementById("touchdown-modal").style.display = "flex";
+const touchDown = function() {
+    let points = 0;
+    if (player.y <= 30) {
+        points+= 7;
+        document.querySelector("#touchdown-modal").style.display = "flex";
+        return true;
     }
-}
+    //$("#points").text(`${points}`)
+};
 
-const gameOver = function() {}
 
 /* function resetGame() {
     animateGame
@@ -224,10 +238,11 @@ const animateGame = function() { // will use to change picture of player every s
     tackleDetection();
     if (tackleDetection()) return;
     touchDown();
+    if (touchDown()) return;
     requestAnimationFrame(animateGame);
 }
 
 
-//animateGame();
+
 
 
