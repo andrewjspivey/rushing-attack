@@ -157,6 +157,8 @@ class Defender {
 };
 
 // give defenders different starting positions and different speeds
+
+
 const defender1 = new Defender(40, 175, 1.9); 
 const defender2 = new Defender(110, 200, 1.7);
 const defender3 = new Defender(190, 190, 2.4);
@@ -193,7 +195,6 @@ const tackle = function(userPos, defPos) {
 // loops through defenders to detect if user has been touched by defender
 const tackleDetection = function() {
 
-    
     for (let i = 0; i < defendersArray.length; i++) {
         if (tackle(player, defendersArray[i])){
             document.querySelector("#tackled-modal").style.display = "flex";
@@ -256,6 +257,8 @@ const animateGame = function() { // will use to change picture of player every s
     if (touchDown()) return;
     window.requestAnimationFrame(animateGame);
 }
+
+
 
 
 

@@ -33,7 +33,7 @@ body {
     display: flex;
     justify-content: center;
     line-height: 100px;
-    
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 
@@ -70,7 +70,8 @@ body {
 	font-size: 20;
 	border-radius: 15px;
 	border: 4px solid darkgray;
-	cursor: pointer;
+    cursor: pointer;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 
 }
 
@@ -82,7 +83,7 @@ body {
 	border-radius: 15px;
 	border: 4px solid darkgray;
 	cursor: pointer;
-
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .game-play {
