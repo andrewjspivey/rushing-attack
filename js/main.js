@@ -25,7 +25,7 @@ const howPlayBtn = document.getElementById("how-to-play");
 const howPlayCloseBtn = document.getElementById("how-play-close");
 const tackledCloseBtn = document.getElementById("tackled-modal-close");
 const touchdownCloseBtn = document.getElementById("touchdown-modal-close");
-console.log(touchdownCloseBtn);
+
 
 
 let gameOver = false;
@@ -101,19 +101,19 @@ document.addEventListener("keydown", function(event) { // event listener for pla
     if (event.keyCode == 38){ // move player up
         player.y -= player.speed;
     }
-    if (event.keyCode == 37){ // move player left
+    if (event.keyCode == 37 && player.x > 0){ // move player left
         player.x -= player.speed;
     }
     if (event.keyCode == 40){ // move player down
         player.y += player.speed;
     }
-    if (event.keyCode == 39){ // move player right
+    if (event.keyCode == 39 && player.x < 365){ // move player right
         player.x += player.speed;
     }
-    if (event.keyCode == 65){ // move player down
+    if (event.keyCode == 65){ // juke left
         player.x -= player.speed * 2.2;
     }
-    if (event.keyCode == 83){ // move player right
+    if (event.keyCode == 83){ // juke right
         player.x += player.speed * 2.2;
     }
 });
@@ -152,16 +152,6 @@ class Defender {
     
 };
 
-/* 
-class Factory {
-    constructor(posX, posY, speed){
-      this.defenderArray = [];
-      this.posX = Math.floor(Math.random() * 40 + 280);
-      this.posyY = Math.floor(Math.random() * )
-    }
-  ​
-    
-  } */
 
 // give defenders different starting positions and different speeds
 
@@ -173,9 +163,10 @@ let defender5 = new Defender(150, 70, 1.3);
 let defender6 = new Defender(310, 80, 2.2);
 let defender7 = new Defender(50, 70, 1.6);
 let defender8 = new Defender(250, 100, 2.0); 
+let defender9 = new Defender(220, 50, 1.6);
 
 
-let defendersArray = [defender1, defender2, defender3, defender4, defender5, defender6, defender7, defender8];
+let defendersArray = [defender1, defender2, defender3, defender4, defender5, defender6, defender7, defender8, defender9];
 
 
 // detects if one of defenders and user touch
@@ -194,7 +185,6 @@ const tackle = function(userPos, defPos) {
         // if the users y position is greater than the defenders y pos plus the defender height, they havnt touched on front of user
         // if the users y position plus the users height is less than the defenders y position they havnt touched on the bottom of the user
 };
-
 
 // loops through defenders to detect if user has been touched by defender
 const tackleDetection = function() {
@@ -239,7 +229,8 @@ const animateGame = function() { // will use to change picture of player every s
     defender6 = new Defender(310, 80, 2.2);
     defender7 = new Defender(50, 70, 1.6);
     defender8 = new Defender(250, 100, 2.0);
-    defendersArray = [defender1, defender2, defender3, defender4, defender5, defender6, defender7, defender8];
+    defender9 = new Defender(220, 50, 1.6);
+    defendersArray = [defender1, defender2, defender3, defender4, defender5, defender6, defender7, defender8, defender9];
     resetGGame = false;
     }
     defender1.drawSprite();
@@ -258,6 +249,8 @@ const animateGame = function() { // will use to change picture of player every s
     defender7.move();
     defender8.drawSprite();
     defender8.move();
+    defender9.drawSprite();
+    defender9.move();
     tackleDetection();
     if (tackleDetection()){
         resetGGame = true;

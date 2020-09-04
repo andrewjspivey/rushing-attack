@@ -120,6 +120,7 @@ canvas {
     border-radius: 15px;
     text-align: center;
     display: none;
+    list-style-position: inside;
 
 }
 
