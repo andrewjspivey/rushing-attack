@@ -44,9 +44,14 @@ body {
     justify-content: center;
     text-align-last: center;
 }
+span {
+    font-size: 30px;
+}
+
 #score {
     right: 30px;
     width: 300px;
+    font-size: 50px;
 }
 
 .options {
