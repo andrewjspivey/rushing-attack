@@ -192,6 +192,8 @@ const tackleDetection = function() {
     for (let i = 0; i < defendersArray.length; i++) {
         if (tackle(player, defendersArray[i])){
             document.querySelector("#tackled-modal").style.display = "flex";
+            points = 0;
+            $("#points").text(`${points}`)
             return true;
         
     } 
