@@ -104,14 +104,20 @@ document.addEventListener("keydown", function(event) { // event listener for pla
     if (event.keyCode == 38){ // move player up
         player.y -= player.speed;
     }
-    else if (event.keyCode == 37){ // move player left
+    if (event.keyCode == 37){ // move player left
         player.x -= player.speed;
     }
-    else if (event.keyCode == 40){ // move player down
+    if (event.keyCode == 40){ // move player down
         player.y += player.speed;
     }
-    else if (event.keyCode == 39){ // move player right
+    if (event.keyCode == 39){ // move player right
         player.x += player.speed;
+    }
+    if (event.keyCode == 65){ // move player down
+        player.x -= player.speed * 2.2;
+    }
+    if (event.keyCode == 83){ // move player right
+        player.x += player.speed * 2.2;
     }
 });
 
@@ -204,12 +210,21 @@ const touchDown = function() {
     if (player.y <= 30) {
         points+= 7;
         document.querySelector("#touchdown-modal").style.display = "flex";
+        window.cancelAnimationFrame(animateGame);
+        //restartGame();
         return true;
     }
     //$("#points").text(`${points}`)
 };
 
-
+/* const restartGame = function() {
+    if (touchDown() == true || tackleDetection() == true) {
+        c.clearRect(0, 0, 400, 720)
+        createField();
+        menuButtons();
+    }
+}
+restartGame(); */
 /* function resetGame() {
     animateGame
 } */
@@ -239,7 +254,7 @@ const animateGame = function() { // will use to change picture of player every s
     if (tackleDetection()) return;
     touchDown();
     if (touchDown()) return;
-    requestAnimationFrame(animateGame);
+    window.requestAnimationFrame(animateGame);
 }
 
 
