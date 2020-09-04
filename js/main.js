@@ -233,7 +233,7 @@ const animateGame = function() { // will use to change picture of player every s
     drawSprite(userSprite, 0, 0, 50, 95, player.x, player.y, 30, 55);
     defender1 = new Defender(40, 175, 1.9); 
     defender2 = new Defender(110, 200, 1.7);
-    defender3 = new Defender(190, 190, 2.4);
+    defender3 = new Defender(190, 230, 2.4);
     defender4 = new Defender(300, 210, 1.5);
     defender5 = new Defender(150, 70, 1.3);
     defender6 = new Defender(310, 80, 2.2);
