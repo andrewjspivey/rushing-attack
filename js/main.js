@@ -1,23 +1,11 @@
 
 /* Rushing Attack */
-/* Breakdown:
-- draw field lines on canvas -done
-- get box that will become sprite image to move with arrow keys- done
-- create object for player and class for defenders  
-these classes will need functions for players to move - class for defenders is done, will go back to user if time
-- create function for being "tackled", 
--  create function for scoring TD,
-- create function to place user and opponents on field and begin moving
-- create functions for menu buttons to start game and look at how to play
-- create function for scoreboard updating 
-- 
- */
-// drawing lines on the field to create canvas
-let canvas = document.querySelector('canvas'); //selected canvas stored in canvas
+
+let canvas = document.querySelector('canvas'); 
 console.log(canvas);
-canvas.width = 400; // setting dimensions of canvas
-canvas.height = 720;
-const c = canvas.getContext('2d'); // setting canvas context to 2d
+canvas.width = 400; 
+canvas.height = 600;
+const c = canvas.getContext('2d'); 
 
 
 const startBtn = document.getElementById("start");
@@ -25,7 +13,6 @@ const howPlayBtn = document.getElementById("how-to-play");
 const howPlayCloseBtn = document.getElementById("how-play-close");
 const tackledCloseBtn = document.getElementById("tackled-modal-close");
 const touchdownCloseBtn = document.getElementById("touchdown-modal-close");
-
 
 
 let gameOver = false;
@@ -52,16 +39,13 @@ const menuButtons = function() {
     }); 
 };
 menuButtons();
-/* $body.on("click", function(){
-    console.log('start game'); // full event obj
-    ///console.log(this); // event.target
-  });   */
-// draws lines on the field with for loop
+
+
 const createField = function () {
     c.fillStyle = "#AA0000";
     c.fillRect(0, 0, 400, 60); // creates top endzone
     c.fillStyle = "#AA0000"; 
-    c.fillRect(0, 660, 400, 60);//creates bottom endzone
+    c.fillRect(0, 540, 400, 60);//creates bottom endzone
     let x = 0;
     let y = 60;
     for (i = 1; i < 12; i++) {
@@ -86,18 +70,18 @@ console.log(defSprite)
 
 //player (user) object
 const player = {
-    x: 175, // x = user images x starting point on canvas
-    y: 600, // y - user images y starting point on canvas
+    x: 175, // x starting point on canvas
+    y: 520, // y starting point on canvas
     speed: 10,
 }
-// function to draw the player's sprite. params are x, y, width, and height dimensions of sprite img and where on canvas
+
 function drawSprite(img, srcX, srcY, srcW, srcH, destX, destY, destW, desth) {
     c.drawImage(img, srcX, srcY, srcW, srcH, destX, destY, destW, desth);
 }
 
 
 // event listener for key control of user
-document.addEventListener("keydown", function(event) { // event listener for player movement
+document.addEventListener("keydown", function(event) { 
     if (event.keyCode == 38){ // move player up
         player.y -= player.speed;
     }
@@ -119,7 +103,6 @@ document.addEventListener("keydown", function(event) { // event listener for pla
 });
 
 
-//creating defender class to add multiple defenders
 class Defender {
     constructor(posX, posY, speed) { //posX and posY are for starting point of defender
         this.posX = posX;
@@ -168,7 +151,6 @@ let defender9 = new Defender(220, 50, 1.6);
 
 let defendersArray = [defender1, defender2, defender3, defender4, defender5, defender6, defender7, defender8, defender9];
 
-
 // detects if one of defenders and user touch
 const tackle = function(userPos, defPos) {
     if (userPos.x > defPos.posX + 30 || 
@@ -179,11 +161,7 @@ const tackle = function(userPos, defPos) {
     } else {
         return true;
     }
-        // if users xposition on canvas is greater than the defenders x position + the width of the defender,
-        // the user and defender hanvt touched on the left side of user,
-        // if the users x position plus the users width is less than defenders x position, they havnt touched on left side of user
-        // if the users y position is greater than the defenders y pos plus the defender height, they havnt touched on front of user
-        // if the users y position plus the users height is less than the defenders y position they havnt touched on the bottom of the user
+
 };
 
 // loops through defenders to detect if user has been touched by defender
@@ -200,9 +178,9 @@ const tackleDetection = function() {
   }          
 }
 
-//  checks if user has crossed the endzone
 let points = 0;
 
+//  checks if user has crossed the endzone
 const touchDown = function() {
     if (player.y <= 30) {
         points += 7;
@@ -221,7 +199,7 @@ const animateGame = function() { // will use to change picture of player every s
     //drawSprite(defSprite, 0, 0, 80, 88, 160, 150, 50, 52);
     if (resetGGame) {
     player.x = 175;
-    player.y = 600;
+    player.y = 520;
     drawSprite(userSprite, 0, 0, 50, 95, player.x, player.y, 30, 55);
     defender1 = new Defender(40, 175, 1.9); 
     defender2 = new Defender(110, 200, 1.7);
@@ -236,7 +214,7 @@ const animateGame = function() { // will use to change picture of player every s
     resetGGame = false;
     }
     defender1.drawSprite();
-    defender1.move();;            //calling defenders and their functions 
+    defender1.move();;            
     defender2.drawSprite();
     defender2.move();
     defender3.drawSprite();

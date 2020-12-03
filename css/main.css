@@ -16,19 +16,19 @@ body {
     margin: 0;
     background-color: #AA0000;
     width: 250px;
-    height: 750px;
+    height: 600px;
     display: flex;
     flex-direction: column;
     border: 10px solid grey;
     position: relative;
-    top: 20px;
-    left: 25px;
+    top: 3rem;
+    left: 3rem;
     
 }
 
 .menu .title {
     width: 235px;
-    height: 120px;
+    height: 60px;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -91,17 +91,20 @@ span {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
-.game-play {
-    position: relative;
-    left: 75px;
+#how-play-close {
+    top: 10px;
+}
+
+#touchdown-modal p {
+    padding-right: 1rem;
 }
 
 canvas {
     border: 3px solid darkgray;
     background-color: rgb(9, 105, 9);
     position: relative;
-    top: 30px;
-    right:100px;
+    top: 2.5rem;
+    right: 1rem;
 
 }
 
@@ -109,7 +112,7 @@ canvas {
     margin: 0;
     position: fixed;
     z-index: 1;
-    height: 200px;
+    height: 250px;
     width: 600px;
     top: 200px;
     background-color: lightgray;
@@ -124,6 +127,8 @@ canvas {
     list-style-position: inside;
 
 }
+
+
 
 #tackled-modal{
     margin: 0;
