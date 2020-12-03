@@ -72,7 +72,7 @@ console.log(defSprite)
 const player = {
     x: 175, // x starting point on canvas
     y: 520, // y starting point on canvas
-    speed: 10,
+    speed: 11,
 }
 
 function drawSprite(img, srcX, srcY, srcW, srcH, destX, destY, destW, desth) {
